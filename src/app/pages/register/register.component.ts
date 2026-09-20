@@ -5,6 +5,7 @@ import { MaterialModule } from '../../shared/material.module';
 import { UserService } from '../../core/service/user.service';
 import { Register } from '../../core/models/Register';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,6 +18,7 @@ export class RegisterComponent implements OnInit {
   private userService = inject(UserService);
   private formBuilder = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
+  private router = inject(Router);
   registerForm: FormGroup = new FormGroup({});
   submitted: boolean = false;
 
@@ -49,9 +51,15 @@ export class RegisterComponent implements OnInit {
     this.userService.register(registerUser)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(
+      // task3 - redirection vers le login apres inscription (TODO du starter).
+      //
+      // alert('SUCCESS!! :-)');
+      // // TODO : router l'utilisateur vers la page de login
+      //
+      // L'utilisateur restait bloque sur le formulaire d'inscription apres une
+      // creation reussie, sans autre moyen d'atteindre le login que de taper l'URL.
       () => {
-        alert('SUCCESS!! :-)');
-        // TODO : router l'utilisateur vers la page de login
+        this.router.navigate(['/login']);
       },
     );
   }
