@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MaterialModule } from '../../shared/material.module';
 import { StudentService } from '../../core/service/student.service';
 import { Student } from '../../core/models/Student';
@@ -11,7 +11,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 // Nouveaute par rapport aux precedents : l'id est lu dans l'URL, pas saisi.
 @Component({
   selector: 'app-student-detail',
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, RouterLink],
   templateUrl: './student-detail.component.html',
   standalone: true,
   styleUrl: './student-detail.component.css'

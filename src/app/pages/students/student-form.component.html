@@ -1,5 +1,5 @@
 <div class="card m-3">
-  <h5 class="card-header">New student</h5>
+  <h5 class="card-header">{{ isEditMode ? 'Edit student' : 'New student' }}</h5>
   <div class="card-body">
 
     @if (errorMessage) {
