@@ -1,0 +1,32 @@
+<div class="card m-3">
+  <h5 class="card-header">Student detail</h5>
+  <div class="card-body">
+
+    @if (loading) {
+      <div>Loading...</div>
+    }
+
+    @if (errorMessage) {
+      <div class="alert alert-danger">{{ errorMessage }}</div>
+    }
+
+    @if (student) {
+      <dl>
+        <dt>Id</dt><dd>{{ student.id }}</dd>
+        <dt>First name</dt><dd>{{ student.firstName }}</dd>
+        <dt>Last name</dt><dd>{{ student.lastName }}</dd>
+        <dt>Email</dt><dd>{{ student.email }}</dd>
+      </dl>
+
+      <div class="text-center">
+        <button class="btn btn-danger mr-1" [disabled]="loading" (click)="onDelete()">
+          Delete
+        </button>
+        <button class="btn btn-secondary" (click)="onBack()">
+          Back to list
+        </button>
+      </div>
+    }
+
+  </div>
+</div>

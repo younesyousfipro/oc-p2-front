@@ -4,6 +4,7 @@ import {AppComponent} from './app.component';
 import {LoginComponent} from './pages/login/login.component';
 import {StudentListComponent} from './pages/students/student-list.component';
 import {StudentCreateComponent} from './pages/students/student-create.component';
+import {StudentDetailComponent} from './pages/students/student-detail.component';
 import {authGuard} from './core/guard/auth.guard';
 
 export const routes: Routes = [
@@ -28,7 +29,10 @@ export const routes: Routes = [
     canActivate: [authGuard],
     children: [
       { path: '', component: StudentListComponent },
-      { path: 'new', component: StudentCreateComponent }
+      { path: 'new', component: StudentCreateComponent },
+      // 'new' doit rester AVANT ':id' : le routeur teste les routes dans l'ordre,
+      // et ':id' capturerait sinon l'URL /students/new avec id = "new".
+      { path: ':id', component: StudentDetailComponent }
     ]
   }
 
