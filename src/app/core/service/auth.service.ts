@@ -26,6 +26,12 @@ export class AuthService {
     return localStorage.getItem(AuthService.TOKEN_KEY);
   }
 
+  // task5 - utilise par l'intercepteur quand le back rejette un token expire,
+  // et disponible pour un futur bouton de deconnexion.
+  logout(): void {
+    localStorage.removeItem(AuthService.TOKEN_KEY);
+  }
+
   private saveToken(token: string): void {
     localStorage.setItem(AuthService.TOKEN_KEY, token);
   }
