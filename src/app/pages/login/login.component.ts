@@ -6,6 +6,7 @@ import { MaterialModule } from '../../shared/material.module';
 import { AuthService } from '../../core/service/auth.service';
 import { Login } from '../../core/models/Login';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 
 // task3 - ecran de login. Meme structure que RegisterComponent, avec en plus la
 // gestion explicite des trois etats demandes par la consigne : chargement, erreur,
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
   private authService = inject(AuthService);
   private formBuilder = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
+  private router = inject(Router);
 
   loginForm: FormGroup = new FormGroup({});
   submitted: boolean = false;
@@ -62,6 +64,9 @@ export class LoginComponent implements OnInit {
         next: () => {
           this.loading = false;
           this.success = true;
+          // task5 - l'ecran liste existe desormais : on y emmene l'utilisateur au
+          // lieu de le laisser sur le formulaire.
+          this.router.navigate(['/students']);
         },
         error: (error: HttpErrorResponse) => {
           this.loading = false;

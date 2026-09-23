@@ -1,0 +1,50 @@
+<div class="card m-3">
+  <h5 class="card-header">{{ isEditMode ? 'Edit student' : 'New student' }}</h5>
+  <div class="card-body">
+
+    @if (errorMessage) {
+      <div class="alert alert-danger">{{ errorMessage }}</div>
+    }
+
+    <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>First name</label>
+        <input type="text" formControlName="firstName" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && form['firstName'].errors }" />
+        @if (submitted && form['firstName'].errors) {
+          <div class="invalid-feedback">First name is required</div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Last name</label>
+        <input type="text" formControlName="lastName" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && form['lastName'].errors }" />
+        @if (submitted && form['lastName'].errors) {
+          <div class="invalid-feedback">Last name is required</div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" formControlName="email" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && form['email'].errors }" />
+        @if (submitted && form['email'].errors) {
+          <div class="invalid-feedback">
+            @if (form['email'].errors?.['required']) { <div>Email is required</div> }
+            @if (form['email'].errors?.['email']) { <div>Email format is invalid</div> }
+          </div>
+        }
+      </div>
+
+      <div class="text-center">
+        <button class="btn btn-primary mr-1" [disabled]="loading">
+          @if (loading) { Saving... } @else { Save }
+        </button>
+        <button class="btn btn-secondary" type="button" (click)="onCancel()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

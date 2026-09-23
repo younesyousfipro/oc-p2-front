@@ -1,0 +1,46 @@
+<div class="card m-3">
+  <h5 class="card-header">Students</h5>
+  <div class="card-body">
+
+    <!-- task5 - routerLink navigue sans recharger la page, contrairement a href -->
+    <a class="btn btn-primary mb-3" routerLink="/students/new">New student</a>
+
+    @if (loading) {
+      <div>Loading...</div>
+    }
+
+    @if (errorMessage) {
+      <div class="alert alert-danger">{{ errorMessage }}</div>
+    }
+
+    @if (!loading && !errorMessage) {
+      @if (students.length === 0) {
+        <div>No student yet.</div>
+      } @else {
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>First name</th>
+              <th>Last name</th>
+              <th>Email</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (student of students; track student.id) {
+              <tr>
+                <td>{{ student.id }}</td>
+                <td>{{ student.firstName }}</td>
+                <td>{{ student.lastName }}</td>
+                <td>{{ student.email }}</td>
+                <td><a [routerLink]="['/students', student.id]">Details</a></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    }
+
+  </div>
+</div>
